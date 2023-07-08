@@ -23,13 +23,6 @@ public class ButtonRegister : MonoBehaviour
         SetTextDay();
     }
 
-
-
-    private void Choose()
-    {
-        RegisterManager.Instance.OnPressDown(number);
-    }
-    
     private void SetTextDay()
     {
         switch (number)
@@ -50,5 +43,10 @@ public class ButtonRegister : MonoBehaviour
                 TextMeshProUgui.SetText("180 ngày");
                 break;
         }
+    }
+
+    private void Choose()
+    {
+        RegisterManager.Instance.OnPressDown(number);
     }
 }

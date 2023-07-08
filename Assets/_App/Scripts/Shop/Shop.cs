@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,21 +12,19 @@ public class Shop : MonoBehaviour
 
     public Button priBtn; 
     public Button xemThem1; 
-    public Button xemThem2; 
+    public Button xemThem2;
 
- 
-
-    private void XemThem2()
+    [Button]
+    public void Init()
     {
-        UIManager.Instance.ShowAllBaiViet();
+        sanPham = GetComponentsInChildren<SanPhamUI>().
+            Where(child => child.gameObject.name.StartsWith("SanPham"))
+            .ToArray();
+        baiViet = GetComponentsInChildren<SanPhamUI>().
+            Where(child => child.gameObject.name.StartsWith("BaiViet"))
+            .ToArray();
     }
 
-    private void ShowPri()
-    {
-        UIManager.Instance.Pri.SetActive(true);
-    }
-    
-    
     void Start()
     {
         priBtn.onClick.AddListener(ShowPri);
@@ -47,5 +47,15 @@ public class Shop : MonoBehaviour
     private void XemThem1()
     {
         UIManager.Instance.ShowAllSanPham();
+    }
+
+    private void XemThem2()
+    {
+        UIManager.Instance.ShowAllBaiViet();
+    }
+
+    private void ShowPri()
+    {
+        UIManager.Instance.Pri.SetActive(true);
     }
 }
